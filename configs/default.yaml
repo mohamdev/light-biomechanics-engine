@@ -1,0 +1,48 @@
+# Lean Bio-Engine Configuration
+# ================================
+
+# Backbone configuration (DINOv2 ViT-Small)
+backbone:
+  name: "dinov2_vits14"           # Options: dinov2_vits14, dinov2_vitb14, dinov2_vitl14
+  pretrained: true
+  freeze: false                   # Set true to freeze backbone weights
+  image_size: 224                 # Input resolution
+  
+# LoRA adaptation (Universal Subspace approach)
+lora:
+  enabled: true
+  rank: 16                        # Low rank for efficiency (cf. Universal Subspace Hypothesis)
+  alpha: 32                       # Scaling factor
+  dropout: 0.05
+  target_modules:                 # Which modules to adapt
+    - "qkv"                       # Query-Key-Value projections
+  bias: "none"                    # Options: none, all, lora_only
+
+# Biomechanics head configuration
+head:
+  n_joints: 24                    # Number of body joints (SMPL-like)
+  hidden_dim: 512                 # Hidden layer dimension
+  dropout: 0.1
+  output_type: "joints_3d"        # Options: joints_3d, mhr_params
+
+# Temporal module (EdgeTAM-inspired)
+temporal:
+  enabled: false                  # Enable for video processing
+  module_type: "sliding_window"   # Options: sliding_window, spatial_perceiver
+  window_size: 8                  # Number of frames in memory
+  perceiver_latents: 32           # Number of latent tokens (for spatial_perceiver)
+  perceiver_heads: 4              # Attention heads
+
+# Training configuration
+training:
+  batch_size: 16
+  learning_rate: 1.0e-4
+  weight_decay: 0.01
+  warmup_steps: 500
+  max_epochs: 100
+
+# Inference configuration
+inference:
+  device: "cuda"                  # Options: cuda, cpu, mps
+  precision: "fp16"               # Options: fp32, fp16, bf16
+  compile: false                  # Use torch.compile (PyTorch 2.0+)

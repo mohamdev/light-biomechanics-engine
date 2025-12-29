@@ -1,0 +1,26 @@
+# Core ML
+torch>=2.0.0
+torchvision>=0.15.0
+timm>=0.9.0
+
+# LoRA / PEFT
+peft>=0.7.0
+transformers>=4.35.0
+
+# Configuration
+pyyaml>=6.0
+omegaconf>=2.3.0
+
+# Utilities
+numpy>=1.24.0
+tqdm>=4.65.0
+einops>=0.7.0
+
+# Development
+pytest>=7.4.0
+black>=23.0.0
+mypy>=1.5.0
+
+# Optional: Visualization
+matplotlib>=3.7.0
+opencv-python>=4.8.0
