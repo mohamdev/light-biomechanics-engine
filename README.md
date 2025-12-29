@@ -1,4 +1,4 @@
-# Lean Bio-Engine 🏃‍♂️
+# Light Biomechanics-Engine 🏃‍♂️
 
 A lightweight biomechanics inference pipeline designed for mobile deployment, based on:
 - **DINOv2 ViT-Small** backbone for robust geometric features
